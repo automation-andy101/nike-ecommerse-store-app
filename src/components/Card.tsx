@@ -4,26 +4,24 @@ import Link from "next/link";
 interface CardProps {
   id: string | number;
   title: string;
-  description?: string;
   price: number;
-  originalPrice?: number;
   image: string;
   category?: string;
+  colorCount?: number;
+  isBestSeller?: boolean;
   isNew?: boolean;
-  isSale?: boolean;
   href?: string;
 }
 
 const Card = ({
   id,
   title,
-  description,
   price,
-  originalPrice,
   image,
   category,
+  colorCount,
+  isBestSeller = false,
   isNew = false,
-  isSale = false,
   href,
 }: CardProps) => {
   const formattedPrice = new Intl.NumberFormat("en-US", {
@@ -31,16 +29,9 @@ const Card = ({
     currency: "USD",
   }).format(price);
 
-  const formattedOriginalPrice = originalPrice
-    ? new Intl.NumberFormat("en-US", {
-        style: "currency",
-        currency: "USD",
-      }).format(originalPrice)
-    : null;
-
   const cardContent = (
-    <article className="group flex flex-col h-full">
-      <div className="relative aspect-square bg-light-200 rounded-lg overflow-hidden">
+    <article className="group flex flex-col h-full overflow-hidden rounded-lg">
+      <div className="relative aspect-square bg-light-200">
         <Image
           src={image}
           alt={title}
@@ -48,40 +39,35 @@ const Card = ({
           sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
           className="object-cover object-center group-hover:scale-105 transition-transform duration-300"
         />
-        <div className="absolute top-3 left-3 flex flex-col gap-2">
-          {isNew && (
-            <span className="px-3 py-1 bg-light-100 text-dark-900 text-caption font-medium rounded">
-              New
+        <div className="absolute top-4 left-4 flex flex-col gap-2">
+          {isBestSeller && (
+            <span className="px-4 py-1.5 bg-light-100 text-orange text-caption font-medium rounded-full">
+              Best Seller
             </span>
           )}
-          {isSale && (
-            <span className="px-3 py-1 bg-red text-light-100 text-caption font-medium rounded">
-              Sale
+          {isNew && (
+            <span className="px-4 py-1.5 bg-light-100 text-green text-caption font-medium rounded-full">
+              New
             </span>
           )}
         </div>
       </div>
 
-      <div className="flex flex-col flex-grow pt-4">
-        {category && (
-          <span className="text-caption text-dark-700 mb-1">{category}</span>
-        )}
-        <h3 className="text-body-medium text-dark-900 line-clamp-2">{title}</h3>
-        {description && (
-          <p className="text-caption text-dark-700 mt-1 line-clamp-2">
-            {description}
-          </p>
-        )}
-        <div className="flex items-center gap-2 mt-auto pt-2">
-          <span className="text-body-medium text-dark-900">
+      <div className="flex flex-col bg-dark-900 p-4">
+        <div className="flex items-start justify-between gap-4">
+          <h3 className="text-body text-light-300 line-clamp-1">{title}</h3>
+          <span className="text-body text-light-100 whitespace-nowrap">
             {formattedPrice}
           </span>
-          {formattedOriginalPrice && (
-            <span className="text-caption text-dark-500 line-through">
-              {formattedOriginalPrice}
-            </span>
-          )}
         </div>
+        {category && (
+          <span className="text-caption text-dark-500 mt-1">{category}</span>
+        )}
+        {colorCount && colorCount > 0 && (
+          <span className="text-caption text-orange mt-1">
+            {colorCount} {colorCount === 1 ? "Colour" : "Colour"}
+          </span>
+        )}
       </div>
     </article>
   );
