@@ -1,42 +1,96 @@
-import Link from "next/link";
+import React from 'react'
+import { Card } from '@/components'
 
-export default function Home() {
+const products = [
+  {
+    id: 1,
+    title: 'Nike Air Zoom Pegasus 41',
+    price: 130,
+    originalPrice: 150,
+    image: '/shoes/shoe-1.jpg',
+    category: "Men's Shoes",
+    isNew: true,
+  },
+  {
+    id: 2,
+    title: 'Nike InfinityRN 4',
+    price: 160,
+    image: '/shoes/shoe-2.webp',
+    category: "Running",
+  },
+  {
+    id: 3,
+    title: 'Nike Metcon 9',
+    price: 150,
+    image: '/shoes/shoe-3.webp',
+    category: 'Training',
+    isSale: true,
+    originalPrice: 170,
+  },
+  {
+    id: 4,
+    title: 'Nike Dunk Low Retro',
+    price: 115,
+    image: '/shoes/shoe-4.webp',
+    category: 'Lifestyle',
+  },
+  {
+    id: 5,
+    title: 'Nike Air Max 270',
+    price: 160,
+    image: '/shoes/shoe-5.avif',
+    category: 'Lifestyle',
+  },
+  {
+    id: 6,
+    title: 'Nike ZoomX Vaporfly 3',
+    price: 250,
+    image: '/shoes/shoe-6.avif',
+    category: 'Running',
+    isNew: true,
+  },
+  {
+    id: 7,
+    title: 'Nike Vomero 17',
+    price: 160,
+    image: '/shoes/shoe-7.avif',
+    category: 'Running',
+  },
+  {
+    id: 8,
+    title: 'Nike Mercurial Vapor 15',
+    price: 85,
+    image: '/shoes/shoe-8.avif',
+    category: 'Football',
+  },
+]
+
+const Home = () => {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-white">
-      <main className="flex flex-col items-center justify-center gap-8 px-4 py-16 text-center">
-        {/* Nike Logo */}
-        <svg
-          className="w-24 h-24 fill-[#111111]"
-          viewBox="0 0 24 24"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path d="M24 7.8L6.442 15.276c-1.456.616-2.679.925-3.668.925-1.12 0-1.933-.392-2.437-1.177-.317-.494-.453-1.094-.407-1.8.046-.706.258-1.477.635-2.313.753-1.666 2.039-3.317 3.859-4.953L7.2 3.4c-.333.266-.666.533-1 .8-1.333 1.067-2.333 2.133-3 3.2-.667 1.067-1 2.133-1 3.2 0 .533.133 1 .4 1.4.267.4.667.6 1.2.6.533 0 1.2-.2 2-.6l16.2-6.8L24 7.8z" />
-        </svg>
+    <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <section aria-labelledby="latest-shoes-heading" className="space-y-8">
+        <h2 id="latest-shoes-heading" className="text-heading-2 font-jost text-dark-900">
+          Latest Shoes
+        </h2>
 
-        <div className="space-y-4">
-          <h1 className="text-4xl font-bold text-[#111111]">
-            Nike Store
-          </h1>
-          <p className="text-lg text-[#555555] max-w-md">
-            Shop the latest Nike shoes and apparel. Just Do It.
-          </p>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          {products.map((p) => (
+            <Card
+              key={p.id}
+              id={p.id}
+              title={p.title}
+              price={p.price}
+              originalPrice={p.originalPrice}
+              image={p.image}
+              category={p.category}
+              isNew={p.isNew}
+              isSale={p.isSale}
+            />
+          ))}
         </div>
-
-        <div className="flex flex-col sm:flex-row gap-4">
-          <Link
-            href="/sign-in"
-            className="flex h-12 items-center justify-center rounded-full bg-[#111111] px-8 text-white font-medium hover:bg-[#333333] transition-colors"
-          >
-            Sign In
-          </Link>
-          <Link
-            href="/sign-up"
-            className="flex h-12 items-center justify-center rounded-full border border-[#111111] px-8 text-[#111111] font-medium hover:bg-[#f5f5f5] transition-colors"
-          >
-            Join Us
-          </Link>
-        </div>
-      </main>
-    </div>
-  );
+      </section>
+    </main>
+  )
 }
+
+export default Home
