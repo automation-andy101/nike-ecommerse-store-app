@@ -18,7 +18,7 @@
     "better-auth": "^1.4.3",
     "dotenv": "^17.2.3",
     "drizzle-orm": "^0.44.7",
-    "next": "16.0.5",
+    "next": "16.0.7",
     "react": "19.2.0",
     "react-dom": "19.2.0",
     "zustand": "^5.0.9"
@@ -30,7 +30,7 @@
     "@types/react-dom": "^19",
     "drizzle-kit": "^0.31.7",
     "eslint": "^9",
-    "eslint-config-next": "16.0.5",
+    "eslint-config-next": "16.0.7",
     "tailwindcss": "^4",
     "typescript": "^5"
   }
