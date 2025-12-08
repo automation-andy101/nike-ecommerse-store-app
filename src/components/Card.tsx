@@ -5,11 +5,13 @@ interface CardProps {
   id: string | number;
   title: string;
   price: number;
+  originalPrice?: number;
   image: string;
   category?: string;
   colorCount?: number;
   isBestSeller?: boolean;
   isNew?: boolean;
+  isSale?: boolean;
   href?: string;
 }
 
